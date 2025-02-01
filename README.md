@@ -6,19 +6,19 @@ You are given an array of integer nums and a 2D integer matrix queries, where fo
 subarray nums[from i..to i] is special or not.
 Return an array of booleans answer such that answer[i] is true if nums[from i..to i] is special.
 
-Intuition
+INTUITION
 
 Identify parity violations
 Use binary search for query processing
 
-Approach
+APPROACH
 
 Iterate through array
 Track indices with parity violations.
 For each query, use lower_bound to check for violations.
 If no violation or violation is outside the sub array then mark as special.
 
-Complexity
+COMPLEXITY
 Time complexity:
 
 Query processing with binary search: O(q logn)
