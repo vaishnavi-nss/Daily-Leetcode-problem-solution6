@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<bool> isArraySpecial(vector<int>& nums, vector<vector<int>>& queries) {
+        int n = nums.size();
+        
+        // Precompute prefix array to track parity violations
+        vector<int> prefixViolation(n, 0);
+        
+        // Check for parity violations between adjacent elements
+        for (int i = 1; i < n; i++) {
+            // If adjacent elements have same parity, mark violation
+            if ((nums[i] % 2) == (nums[i-1] % 2)) {
+                prefixViolation[i] = 1;
+            }
+            
+            // Cumulative sum of violations
+            prefixViolation[i] += prefixViolation[i-1];
+        }
+        
+        // Process queries
+        vector<bool> answer;
+        for (auto& query : queries) {
+            int from = query[0];
+            int to = query[1];
+            
+            // Check if subarray is special
+            // If number of violations between from and to is 0, it's special
+            answer.push_back(prefixViolation[to] - prefixViolation[from] == 0);
+        }
+        
+        return answer;
+    }
+};
